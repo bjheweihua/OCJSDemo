@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+      <title>demo</title>
+      </head>
+  <body>
+    <div>
+      <h3>JS与Native交互</h3>
+    </div>
+    <div>
+      <input type = "button" style="width:50%; height:30px;" id="Button" value="打开相机获取图片" onclick="getImage()"></button>
+        </div><dir />
+    <div>
+      <!--src="图片的相对路径" 如果把html文件导入工程中，图片路径和OC一样只写图片名字和后缀就可以，（记得要先把图片添加到工程） 图片也可以实现按钮的方法getIOSImage -->
+      <img src="testImg.png" id="imgView" style="width: 40%; height: 40%;" onclick="getImage()">
+    </div>
+    <span id="contentLabel" style="width: 200px; height: 50%; color:orangered; font-size:14px" value="等待获取ios参数" >
+      </div>
+      <script>
+          
+        // 在下面这里实现JS调用系统原生API
+        var getImage = function(){
+          var params = {'bussinesType':'1','describe':'JS调OC, 打开相机获取照片'};
+          window.iosDelegate.jsToNative(JSON.stringify(params));
+        }
+      
+      // 这里是iOS调用JS的方法
+      function setImageWithImagePath(arguments){
+        document.getElementById('imgView').src = arguments['imagePath']; // 图片路径
+        document.getElementById('contentLabel').innerHTML = arguments['content']; // 内容描述
+      }
+      </script>
+      </body>
+</html>
